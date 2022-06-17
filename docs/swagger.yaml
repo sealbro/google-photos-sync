@@ -1,0 +1,97 @@
+basePath: /api
+host: localhost:8080
+info:
+  contact: {}
+  title: Google photos sync account
+  version: "1.0"
+paths:
+  /v1/auth/account/from:
+    get:
+      consumes:
+      - application/json
+      description: Get url from account
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      tags:
+      - auth
+  /v1/auth/account/to:
+    get:
+      consumes:
+      - application/json
+      description: Get url to account
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      tags:
+      - auth
+  /v1/auth/callback:
+    get:
+      consumes:
+      - application/json
+      description: Google callback endpoint
+      parameters:
+      - description: account type [from / to]
+        in: query
+        name: state
+        required: true
+        type: string
+      - description: google response code
+        in: query
+        name: code
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      tags:
+      - auth
+  /v1/state/complete:
+    post:
+      consumes:
+      - application/json
+      description: Check and set Complete state
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      tags:
+      - state
+  /v1/state/stats:
+    get:
+      consumes:
+      - application/json
+      description: Get current sync statistics
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      tags:
+      - state
+  /v1/state/sync:
+    post:
+      consumes:
+      - application/json
+      description: Check and set Sync state
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      tags:
+      - state
+schemes:
+- http
+swagger: "2.0"
